@@ -6,7 +6,13 @@ class GuestRepository {
 
     //CRUD -> Created,Read,Update,Delete
 
+    //created
+    fun save(guest: GuestModel){
+
+    }
+
     //read
+
     fun getAbsents(): List<GuestModel> {
         val list: MutableList<GuestModel> = ArrayList()
         return list
@@ -22,8 +28,7 @@ class GuestRepository {
         return list
     }
 
-    //created
-    fun save(guest: GuestModel){}
+
 
     //update
     fun update(guest: GuestModel) {}
