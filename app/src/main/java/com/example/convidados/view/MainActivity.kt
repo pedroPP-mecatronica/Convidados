@@ -12,6 +12,7 @@ import androidx.drawerlayout.widget.DrawerLayout
 import androidx.appcompat.app.AppCompatActivity
 import com.example.convidados.R
 import com.example.convidados.databinding.ActivityMainBinding
+import com.facebook.stetho.Stetho
 
 class MainActivity : AppCompatActivity() {
 
@@ -26,10 +27,10 @@ class MainActivity : AppCompatActivity() {
 
         setSupportActionBar(binding.appBarMain.toolbar)
 
-//        binding.appBarMain.fab.setOnClickListener { view ->
-//            Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-//                .setAction("Action", null).show()
-//        }
+        Stetho.initialize(Stetho.newInitializerBuilder(this)
+            .enableDumpapp(Stetho.defaultDumperPluginsProvider(this))
+            .enableWebKitInspector(Stetho.defaultInspectorModulesProvider(this))
+            .build());
 
         binding.appBarMain.btnAddGuest.setOnClickListener{
             startActivity(Intent(applicationContext, GuestFormActivity::class.java))
