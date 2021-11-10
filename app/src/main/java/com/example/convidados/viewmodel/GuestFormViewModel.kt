@@ -1,7 +1,6 @@
 package com.example.convidados.viewmodel
 
 import android.app.Application
-import android.content.Context
 import android.util.Log
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.LiveData
@@ -14,14 +13,16 @@ class GuestFormViewModel(application: Application) : AndroidViewModel(applicatio
 
     private val mContext = application.applicationContext
     private val mGuestRepository: GuestRepository = GuestRepository.getInstance(mContext)
+
     private var mSaveGuest = MutableLiveData<Boolean>()
+
     val saveGuest: LiveData<Boolean> = mSaveGuest
 
-    fun save(name: String, presence: Boolean) {
+    fun save(id: Int,name: String, presence: Boolean) {
         //enviar convidado ao repositorio
-        val guest = GuestModel(name, presence)
-        mGuestRepository.save(guest)
-        mGuestRepository.getAll()
-    }
+        val guest = GuestModel(id,name = name, presence = presence)
 
+        mSaveGuest.value = mGuestRepository.save(guest)
+
+    }
 }
