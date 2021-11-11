@@ -13,4 +13,6 @@
     <string name="name">Nome</string>
     <string name="salvar">SALVAR</string>
     <string name="confirmar">CONFIRMAR</string>
+    <string name="convidado">Convidado</string>
+    <string name="presence">PRESENCE</string>
 </resources>

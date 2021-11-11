@@ -32,7 +32,6 @@ class GuestRepository private constructor(context: Context) {
 
             contentValues.put(DataBaseConstants.GUEST.COLUMNS.NAME, guest.name)
             contentValues.put(DataBaseConstants.GUEST.COLUMNS.PRESENCE, guest.presence)
-
             db.insert(DataBaseConstants.GUEST.TABLE_NAME, null, contentValues)
             true
         } catch (error: Exception) {
