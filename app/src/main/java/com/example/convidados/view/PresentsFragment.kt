@@ -4,17 +4,22 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.LinearLayout
 import android.widget.TextView
+import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
-import com.example.convidados.databinding.FragmentGalleryBinding
+import androidx.recyclerview.widget.LinearLayoutManager
+import com.example.convidados.databinding.FragmentPresentsBinding
+import com.example.convidados.view.adapter.GuestAdapter
 import com.example.convidados.viewmodel.PresentsViewModel
 
 class PresentsFragment : Fragment() {
 
     private lateinit var presentsViewModel: PresentsViewModel
-    private var _binding: FragmentGalleryBinding? = null
+    private var _binding: FragmentPresentsBinding? = null
+    private lateinit var adapter: GuestAdapter
 
     // This property is only valid between onCreateView and
     // onDestroyView.
@@ -28,14 +33,25 @@ class PresentsFragment : Fragment() {
         presentsViewModel =
             ViewModelProvider(this).get(PresentsViewModel::class.java)
 
-        _binding = FragmentGalleryBinding.inflate(inflater, container, false)
-        val root: View = binding.root
+        _binding = FragmentPresentsBinding.inflate(inflater, container, false)
+        return binding.root
 
-        val textView: TextView = binding.textGallery
-        presentsViewModel.text.observe(viewLifecycleOwner, Observer {
-            textView.text = it
+    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        addObserve()
+        presentsViewModel.getGuests()
+    }
+
+    private fun addObserve() {
+        presentsViewModel.guestsCallBack.observe(viewLifecycleOwner, Observer {
+            binding.listGuestPresents.adapter = GuestAdapter(it)
+            binding.listGuestPresents.layoutManager = LinearLayoutManager(requireContext())
         })
-        return root
+        presentsViewModel.mensagem.observe(viewLifecycleOwner, Observer {
+            Toast.makeText(requireContext(),it,Toast.LENGTH_SHORT).show()
+        })
     }
 
     override fun onDestroyView() {

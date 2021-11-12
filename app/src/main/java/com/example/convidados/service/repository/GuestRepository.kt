@@ -10,7 +10,12 @@ class GuestRepository private constructor(context: Context) {
 
     //CRUD -> Created,Read,Update,Delete
 
-    //created//Singleton(tem um método estático que apenas ele é responsável por refernciar a classe)
+    //created
+
+
+    /**
+     Singleton(tem um método estático que apenas ele é responsável por refernciar a classe)
+     */
 
     private var mGuestDataBaseHelper: GuestDataBaseHelper = GuestDataBaseHelper(context)
 
@@ -40,7 +45,6 @@ class GuestRepository private constructor(context: Context) {
     }
 
     //read
-
     fun get(id: Int): GuestModel? {
 
         var guest: GuestModel? = null
